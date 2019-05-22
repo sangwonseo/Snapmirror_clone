@@ -1,0 +1,16 @@
+- name: Sample Playbook
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+    - var.yml
+  tasks:
+    - name: create SnapShot
+      na_ontap_cg_snapshot:
+        state: present
+        hostname: "{{ source_netapp_vserver_name }}"
+        username: "{{ source_netapp_vserver_username }}"
+        password: "{{ source_netapp_vserver_password }}"
+        vserver: "{{ source_netapp_vserver_name }}"
+        volumes:  [ "{{ source_netapp_volume1_name }}", "{{ source_netapp_volume2_name }}" ]
+        snapshot: "{{ source_netapp_volumes_cg_snap_name }}"

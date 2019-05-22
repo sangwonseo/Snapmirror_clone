@@ -1,0 +1,30 @@
+- name: Sample Playbook
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+    - var.yml
+  tasks:
+    - name: Unmount nfs export 
+      mount: 
+        state: absent
+        path: /{{ source_netapp_volume1_clone1 }}
+        src: "{{ source_netapp_vserver_name }}:/{{ source_netapp_volume1_clone1 }}" 
+        fstype: nfs
+    - name: Delete Volume
+      na_ontap_volume:
+        state: absent
+        hostname: "{{ source_netapp_vserver_name }}"
+        username: "{{ source_netapp_vserver_username }}"
+        password: "{{ source_netapp_vserver_password }}"
+        vserver: "{{ source_netapp_vserver_name }}"
+        name: "{{ source_netapp_volume1_clone1 }}"
+    - name: delete SnapShot
+      na_ontap_snapshot:
+        state: absent
+        hostname: "{{ source_netapp_vserver_name }}"
+        username: "{{ source_netapp_vserver_username }}"
+        password: "{{ source_netapp_vserver_password }}"
+        vserver: "{{ source_netapp_vserver_name }}"
+        volume: "{{ source_netapp_volume1_name }}"
+        snapshot: "{{ source_netapp_volume1_snap_name }}"

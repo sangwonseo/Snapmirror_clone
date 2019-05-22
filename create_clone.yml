@@ -1,0 +1,60 @@
+- name: Sample Playbook
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+    - var.yml
+  tasks:
+    - name: Create FlexVol
+      na_ontap_volume:
+        state: present
+        type: rw
+        name: "{{ source_netapp_volume1_name }}"
+        is_infinite: False
+        aggregate_name: "{{ source_netapp_data_aggregate_1 }}"
+        size: "{{ source_netapp_data_volume_size_tb }}"
+        size_unit: tb
+        space_guarantee: none
+        policy: default
+        percent_snapshot_space: 60
+        vserver: "{{ source_netapp_vserver_name }}"
+        wait_for_completion: True
+        hostname: "{{ source_netapp_vserver_name }}"
+        username: "{{ source_netapp_vserver_username }}"
+        password: "{{ source_netapp_vserver_password }}"
+    - name: create SnapShot
+      na_ontap_snapshot:
+        state: present
+        hostname: "{{ source_netapp_vserver_name }}"
+        username: "{{ source_netapp_vserver_username }}"
+        password: "{{ source_netapp_vserver_password }}"
+        vserver: "{{ source_netapp_vserver_name }}"
+        volume: "{{ source_netapp_volume1_name }}"
+        snapshot: "{{ source_netapp_volume1_snap_name }}"
+    - name: create volume clone
+      na_ontap_volume_clone:
+        state: present
+        hostname: "{{ source_netapp_vserver_name }}"
+        username: "{{ source_netapp_vserver_username }}"
+        password: "{{ source_netapp_vserver_password }}"
+        vserver: "{{ source_netapp_vserver_name }}"
+        parent_volume: "{{ source_netapp_volume1_name }}"
+        volume: "{{ source_netapp_volume1_clone1 }}"
+        parent_snapshot: "{{ source_netapp_volume1_snap_name }}"
+        space_reserve: none
+        junction_path: "/{{ source_netapp_volume1_clone1 }}"
+    - name: Update fstab file
+      lineinfile:
+        path: /etc/fstab
+        line: "{{ source_netapp_vserver_name }}:/{{ source_netapp_volume1_clone1 }} /{{ source_netapp_volume1_clone1 }} nfs defaults 0 0"
+    - name: Verify mount directory exists
+      file:
+        path: /{{ source_netapp_volume1_clone1 }}
+        state: directory
+    - name: Mount nfs export
+      mount:
+        state: mounted
+        path: /{{ source_netapp_volume1_clone1 }}
+        src: "{{ source_netapp_vserver_name }}:/{{ source_netapp_volume1_clone1 }}"
+        fstype: nfs
+

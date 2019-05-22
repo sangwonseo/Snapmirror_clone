@@ -1,0 +1,42 @@
+- name: Sample Playbook
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+    - var.yml
+  tasks:
+    - name: Create FlexVol 1
+      na_ontap_volume:
+        state: absent
+        type: rw
+        name: "{{ source_netapp_volume1_name }}"
+        is_infinite: False
+        aggregate_name: "{{ source_netapp_data_aggregate_1 }}"
+        size: "{{ source_netapp_data_volume_size_tb }}"
+        size_unit: tb
+        space_guarantee: none
+        policy: default
+        percent_snapshot_space: 60
+        vserver: "{{ source_netapp_vserver_name }}"
+        wait_for_completion: True
+        hostname: "{{ source_netapp_vserver_name }}"
+        username: "{{ source_netapp_vserver_username }}"
+        password: "{{ source_netapp_vserver_password }}"
+    - name: Create FlexVol 2
+      na_ontap_volume:
+        state: absent
+        type: rw
+        name: "{{ source_netapp_volume2_name }}"
+        is_infinite: False
+        aggregate_name: "{{ source_netapp_data_aggregate_1 }}"
+        size: "{{ source_netapp_data_volume_size_tb }}"
+        size_unit: tb
+        space_guarantee: none
+        policy: default
+        percent_snapshot_space: 60
+        vserver: "{{ source_netapp_vserver_name }}"
+        wait_for_completion: True
+        hostname: "{{ source_netapp_vserver_name }}"
+        username: "{{ source_netapp_vserver_username }}"
+        password: "{{ source_netapp_vserver_password }}"
+

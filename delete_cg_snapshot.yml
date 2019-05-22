@@ -1,0 +1,26 @@
+- name: Sample Playbook
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+    - var.yml
+  tasks:
+    - name: delete CG SnapShot 1
+      na_ontap_snapshot:
+        state: absent
+        hostname: "{{ source_netapp_vserver_name }}"
+        username: "{{ source_netapp_vserver_username }}"
+        password: "{{ source_netapp_vserver_password }}"
+        vserver: "{{ source_netapp_vserver_name }}"
+        volume: "{{ source_netapp_volume1_name }}"
+        snapshot: "{{ source_netapp_volumes_cg_snap_name }}"
+    - name: delete CG SnapShot 2
+      na_ontap_snapshot:
+        state: absent
+        hostname: "{{ source_netapp_vserver_name }}"
+        username: "{{ source_netapp_vserver_username }}"
+        password: "{{ source_netapp_vserver_password }}"
+        vserver: "{{ source_netapp_vserver_name }}"
+        volume: "{{ source_netapp_volume2_name }}"
+        snapshot: "{{ source_netapp_volumes_cg_snap_name }}"
+
