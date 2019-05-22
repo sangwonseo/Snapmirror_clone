@@ -4,7 +4,7 @@
   connection: local
   vars_files:
     login: &login
-    - var.yml
+    - env_variables.yaml
   tasks:
     - name: create SnapShot
       na_ontap_snapshot:
