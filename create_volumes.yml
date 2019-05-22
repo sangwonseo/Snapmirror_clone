@@ -12,14 +12,14 @@
       na_ontap_volume:
         state: present
         type: rw
-        name: "{{ source_netapp_volume1_name }}"
+        name: "{{ item.value.source_netapp_volume_name }}"
         is_infinite: False
-        aggregate_name: "{{ source_netapp_data_aggregate_1 }}"
-        size: "{{ source_netapp_data_volume_size_tb }}"
+        aggregate_name: "{{ item.value.netapp_data_aggregate_1 }}"
+        size: "{{ item.value.source_netapp_data_volume_size_tb }}"
         size_unit: tb
         space_guarantee: none
         policy: default
         percent_snapshot_space: 60
-        vserver: "{{ source_netapp_vserver_name }}"
+        vserver: "{{ item.value.source_netapp_vserver_name }}"
         <<: *login
-      with_dict: '{{ vms }}'
+      with_dict: '{{ flex_vol }}'
