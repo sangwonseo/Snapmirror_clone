@@ -5,7 +5,7 @@ source_netapp_volume1_name: trident_default_basic_pvc_2067d
 source_netapp_volume1_snap_name: trident_default_basic_pvc_2067d_snapshot 
 source_netapp_vserver_name: Ansible_Handson
 
-multi_vol:
+flex_vol:
   new_flexvol_2:
     source_netapp_volume_name: new_flexvol_2
     source_netapp_data_volume_size_tb: 2
