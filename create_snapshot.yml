@@ -4,16 +4,13 @@
   connection: local
   vars:
     login: &login
-      hostname: "{{ source_netapp_vserver_name }}"
-      username: "{{ source_netapp_vserver_username }}"
-      password: "{{ source_netapp_vserver_password }}"
+      hostname: "{{ source_netapp_cluster_name }}"
+      username: "{{ source_netapp_cluster_username }}"
+      password: "{{ source_netapp_cluster_password }}"
   tasks:
     - name: create SnapShot
       na_ontap_snapshot:
         state: present
-   #     hostname: "{{ source_netapp_vserver_name }}"
-   #     username: "{{ source_netapp_vserver_username }}"
-   #     password: "{{ source_netapp_vserver_password }}"
         vserver: "{{ source_netapp_vserver_name }}"
         volume: "{{ source_netapp_volume1_name }}"
         snapshot: "{{ source_netapp_volume1_snap_name }}"
