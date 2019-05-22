@@ -1,6 +1,6 @@
-        hostname: "{{ source_netapp_vserver_name }}"
-        username: "{{ source_netapp_vserver_username }}"
-        password: "{{ source_netapp_vserver_password }}"
-        vserver: "{{ source_netapp_vserver_name }}"
-        volume: "{{ source_netapp_volume1_name }}"
-        snapshot: "{{ source_netapp_volume1_snap_name }}"
+        hostname: 49.254.105.140
+        username: admin
+        password: NetApp123
+        vserver: Ansible_Handson
+        volume: trident_default_basic_pvc_2067d
+        snapshot: trident_default_basic_pvc_2067d_snapshot 
