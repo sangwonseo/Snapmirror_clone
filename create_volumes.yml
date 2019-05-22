@@ -14,7 +14,7 @@
         type: rw
         name: "{{ item.value.source_netapp_volume_name }}"
         is_infinite: False
-        aggregate_name: "{{ item.value.netapp_data_aggregate_1 }}"
+        aggregate_name: "{{ item.value.source_netapp_data_aggregate_1 }}"
         size: "{{ item.value.source_netapp_data_volume_size_tb }}"
         size_unit: tb
         space_guarantee: none
