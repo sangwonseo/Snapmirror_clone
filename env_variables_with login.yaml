@@ -4,3 +4,15 @@ source_netapp_cluster_username: admin
 source_netapp_volume1_name: trident_default_basic_pvc_2067d
 source_netapp_volume1_snap_name: trident_default_basic_pvc_2067d_snapshot 
 source_netapp_vserver_name: Ansible_Handson
+
+multi_vol:
+  new_flexvol_2:
+    source_netapp_volume_name: new_flexvol_2
+    source_netapp_data_volume_size_tb: 2
+    source_netapp_vserver_name: Ansible_Handson
+    source_netapp_data_aggregate_1: aggr1_node1
+  new_flexvol_3:
+    source_netapp_volume_name: new_flexvol_3
+    source_netapp_data_volume_size_tb: 1
+    source_netapp_vserver_name: Ansible_Handson
+    source_netapp_data_aggregate_1: aggr1_node1
