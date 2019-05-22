@@ -22,3 +22,4 @@
         percent_snapshot_space: 60
         vserver: "{{ source_netapp_vserver_name }}"
         <<: *login
+      with_dict: '{{ vms }}'
