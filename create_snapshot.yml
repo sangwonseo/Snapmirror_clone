@@ -2,9 +2,11 @@
   hosts: localhost
   gather_facts: no
   connection: local
-  vars_files:
+  vars:
     login: &login
-    env_variables.yaml
+      hostname: "{{ source_netapp_vserver_name }}"
+      username: "{{ source_netapp_vserver_username }}"
+      password: "{{ source_netapp_vserver_password }}"
   tasks:
     - name: create SnapShot
       na_ontap_snapshot:
