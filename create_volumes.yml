@@ -2,8 +2,11 @@
   hosts: localhost
   gather_facts: no
   connection: local
-  vars_files:
-    - var.yml
+  vars:
+    login: &login
+      hostname: "{{ source_netapp_cluster_name }}"
+      username: "{{ source_netapp_cluster_username }}"
+      password: "{{ source_netapp_cluster_password }}"
   tasks:
     - name: Create FlexVol 
       na_ontap_volume:
@@ -18,4 +21,4 @@
         policy: default
         percent_snapshot_space: 60
         vserver: "{{ source_netapp_vserver_name }}"
-        wait_for_completion: True
+        <<: *login
