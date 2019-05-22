@@ -1,1 +1,6 @@
-eee
+        hostname: "{{ source_netapp_vserver_name }}"
+        username: "{{ source_netapp_vserver_username }}"
+        password: "{{ source_netapp_vserver_password }}"
+        vserver: "{{ source_netapp_vserver_name }}"
+        volume: "{{ source_netapp_volume1_name }}"
+        snapshot: "{{ source_netapp_volume1_snap_name }}"
