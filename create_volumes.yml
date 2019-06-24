@@ -15,8 +15,8 @@
         name: "{{ item.value.source_netapp_volume_name }}"
         is_infinite: False
         aggregate_name: "{{ item.value.source_netapp_data_aggregate_1 }}"
-        size: "{{ item.value.source_netapp_data_volume_size_tb }}"
-        size_unit: tb
+        size: "{{ item.value.source_netapp_data_volume_size_gb }}"
+        size_unit: gb
         space_guarantee: none
         policy: default
         percent_snapshot_space: 60
